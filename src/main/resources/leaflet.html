@@ -1,67 +1,195 @@
-
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
     <style>
-        html, body {
-            height : 100%;
+
+        html,
+        body,
+        #container {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
         }
 
         body {
-            margin : 0;
-            padding : 0;
+            margin: 0;
+            padding: 0;
         }
 
         #map {
-            width : 100%;
-            height : 100%;
+            width: auto;
+            height: 100%;
         }
+
+        /* Modal Sidebar */
+
+        .modal.left .modal-dialog {
+            position: fixed;
+            margin: auto;
+            width: 30%;
+            height: 100%;
+            -webkit-transform: translate3d(0%, 0, 0);
+            -ms-transform: translate3d(0%, 0, 0);
+            -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+        }
+
+        .modal.left .modal-content {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .modal.left .modal-body {
+            padding: 15px 15px 80px;
+        }
+
+
+        .modal.left.fade .modal-dialog {
+            left: -320px;
+            -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+            transition: opacity 0.3s linear, left 0.3s ease-out;
+        }
+
+        .modal.left.fade.in .modal-dialog {
+            left: 0;
+        }
+
+        .modal-content {
+            border-radius: 0;
+            border: none;
+        }
+
+        .modal-header {
+            border-bottom-color: #EEEEEE;
+            background-color: #FAFAFA;
+        }
+
+        .modal-backdrop {
+            background-color: transparent;
+            display: none;
+        }
+
+        .modal {
+            pointer-events: none;
+            z-index: 10000000000000;
+        }
+
+        .modal-content {
+            pointer-events: auto;
+        }
+
+
     </style>
+
 </head>
 <body>
 <div id="map"></div>
+<!-- Modal EMPTY-->
+<div aria-labelledby="myModalLabel" class="modal left fade" id="emptymodal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+        <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+</div>
+<!-- modal -->
+
 <script>
 
+    /*Custom marker */
+    PlaceMarker = L.CircleMarker.extend({
+        options: {
+            id: ''
+        }
+    });
+    /*Include the marker data and create the layers */
+    let pinData = [
+        //et sted
+        ["urban", "1", 55.32037, 15.18821],
+        //et andet sted
+        ["ocean", "2", 55.31637, 15.18911],
+        //et tredje sted
+        ["urban", "3", 55.32237, 15.18641],
+        //et helt andet sted
+        ["ocean", "4", 55.31838, 15.18611],
+        //et fantastisk sted
+        ["ocean", "5", 55.31625, 15.19115],
+        //Verdenens Ende
+        ["nature", "6", 55.32290, 15.19100]
+    ];
+
+    /* Create layers with different colors or pictures */
+    let urban = new L.LayerGroup();
+    for (var i = 0; i < pinData.length; i++) {
+        if (pinData[i][0] == "urban") {
+            marker = new PlaceMarker([pinData[i][2], pinData[i][3]], {
+                color: "#999999",
+                id: pinData[i][1]
+            }).addTo(urban).on('click', markerOnClick);
+        }
+    }
+    let ocean = new L.LayerGroup();
+    for (var i = 0; i < pinData.length; i++) {
+        if (pinData[i][0] == "ocean") {
+            marker = new PlaceMarker([pinData[i][2], pinData[i][3]], {
+                color: "#00FFFF",
+                id: pinData[i][1]
+            }).addTo(ocean).on('click', markerOnClick);
+        }
+    }
+    let nature = new L.LayerGroup();
+    for (var i = 0; i < pinData.length; i++) {
+        if (pinData[i][0] == "nature") {
+            marker = new PlaceMarker([pinData[i][2], pinData[i][3]], {
+                color: "#008000",
+                id: pinData[i][1]
+            }).addTo(nature).on('click', markerOnClick);
+        }
+    }
+    /* Some handy variables*/
+    let booklayers = [urban, ocean, nature]
+
+
+    /*Initialize map; and change Lat & Lang to Christians Ø*/
     let x = 55.32037
     let y = 15.18821
     let z = 16
+    let mymap = L.map('map', {
+        layers: booklayers
+    }).setView([x, y], z);
+    mymap.zoomControl.setPosition('bottomright');
 
-    let mymap = L.map('map').setView( [x, y], z);
-
-    //Henter tiles fra OpenStreetMap - L er Leaflet objekt
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    /*Add tileLayers from openstreetmap*/
+    mapLink = '<a href="http://openstreetmap.org">OpenStreetMap<\/a>';
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; ' + mapLink + ' Christiansø Map',
         maxZoom: 18,
     }).addTo(mymap);
 
-    // Henter punkter fra databaas, her er de hardkodet
-    let punkter = [
-        [55.32037, 15.18821],
-        [55.31637, 15.18911],
-        [55.32237, 15.18641],
-        [55.31838, 15.18611],
-        [55.31625, 15.19115]
-    ];
-
-    //sætter marker for hvert punkt
-    for (punkt of punkter) {
-        var marker = L.marker(punkt).addTo(mymap);
+    /* Create modal & center map on marker */
+    function markerOnClick(e) {
+        let id = this.options.id;
+        $(".modal-content").html('This is marker ' + id);
+        $('#emptymodal').modal('show');
+        mymap.setView(e.target.getLatLng());
+        e.preventDefault();
     }
 
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup. Her står der noget mere ...");
+    /* Close modal when clicking on the map */
+    mymap.on('click', function (e) {
+        $('.modal').modal('hide');
+    });
 
-    var popup = L.popup();
-
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(mymap);
-    }
-
-    mymap.on('click', onMapClick);
 
 </script>
 
