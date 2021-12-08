@@ -1199,3 +1199,6 @@ CREATE TABLE file_manager(
                              guided_tour_id int not null,
                              FOREIGN KEY(guided_tour_id) references guided_tours(id)
 ) [42101-200]
+2021-12-06 11:46:12 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "LOCATION_ID[*]"; SQL statement:
+LOCATION_ID [42000-200]
