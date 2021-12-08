@@ -1,10 +1,11 @@
 package com.example.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class FileManager {
@@ -19,7 +20,19 @@ public class FileManager {
 
     private LocalDateTime timestamp;
 
+    @OneToMany(mappedBy = "guidedTour")
+    @JsonManagedReference
+    private List<GuidedTour> guidedTours;
+
     public FileManager(){}
+
+    public FileManager(int id, String name, String data, LocalDateTime timestamp, List<GuidedTour> guidedTours) {
+        this.id = id;
+        this.name = name;
+        this.data = data;
+        this.timestamp = timestamp;
+        this.guidedTours = guidedTours;
+    }
 
     public int getId() {
         return id;
@@ -39,6 +52,30 @@ public class FileManager {
 
     public LocalDateTime getTimestamp() {
         return timestamp;
+    }
+    //-- metode der kan tjekke om 2 objekter er ens, og som pt tjekker på navn --\\
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FileManager fileManager = (FileManager) o;
+        return Objects.equals(name, fileManager.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "FileManager{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", data='" + data + '\'' +
+                ", timestamp=" + timestamp +
+                ", guidedTours=" + guidedTours +
+                '}';
     }
 }
 

@@ -1,40 +1,69 @@
 package com.example.demo.models;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "locationId")
 @Entity
-@Table
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(name="name")
+    @Column(name = "location_id")
+    private int locationId;
+
+    @Column(name = "name")
     private String name;
-    @Column(name="xpos")
+    @Column(name = "xpos")
     private double xpos;
-    @Column(name="ypos")
+    @Column(name = "ypos")
     private double ypos;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "location_attraction",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "attraction_id"))
+    private List<Attraction> attractions;
 
+    @OneToMany(mappedBy = "location", cascade=CascadeType.ALL)
+    private List<Quiz> quiz;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "location_route",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "route_id"))
+    private List<Route> routes;
 
     public Location() {
     }
 
-
-    public Location(int id, String name, double xpos, double ypos) {
-        this.id = id;
+    public Location(int locationId, String name, double xpos, double ypos) {
+        this.locationId = locationId;
         this.name = name;
         this.xpos = xpos;
         this.ypos = ypos;
     }
 
-    public int getId() {
-        return id;
+    public Location(int locationId, String name, double xpos, double ypos, List<Attraction> attractions, List<Quiz> quiz, List<Route> routes) {
+        this.locationId = locationId;
+        this.name = name;
+        this.xpos = xpos;
+        this.ypos = ypos;
+        this.attractions = attractions;
+        this.quiz = quiz;
+        this.routes = routes;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getLocationId() {
+        return locationId;
     }
 
     public String getName() {
@@ -61,4 +90,54 @@ public class Location {
         this.ypos = ypos;
     }
 
+    public List<Attraction> getAttractions() {
+        return attractions;
+    }
+
+    public void setAttractions(List<Attraction> attractions) {
+        this.attractions = attractions;
+    }
+
+    public List<Quiz> getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(List<Quiz> quiz) {
+        this.quiz = quiz;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
+
+    //metode der kan tjekke om 2 objekter er ens, og som pt tjekker på navn
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return Objects.equals(name, location.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "locationId=" + locationId +
+                ", name='" + name + '\'' +
+                ", xpos=" + xpos +
+                ", ypos=" + ypos +
+                ", attractions=" + attractions +
+                ", quiz=" + quiz +
+                ", routes=" + routes +
+                '}';
+    }
 }
