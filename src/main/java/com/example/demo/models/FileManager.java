@@ -1,12 +1,16 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 public class FileManager {
 
@@ -20,8 +24,7 @@ public class FileManager {
 
     private LocalDateTime timestamp;
 
-    @OneToMany(mappedBy = "guidedTour")
-    @JsonManagedReference
+    @OneToMany
     private List<GuidedTour> guidedTours;
 
     public FileManager(){}

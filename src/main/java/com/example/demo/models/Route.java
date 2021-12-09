@@ -21,11 +21,10 @@ public class Route {
     private String name;
     private double length;
 
-    @ManyToMany(mappedBy = "route")
+    @ManyToMany(mappedBy = "routes")
     private List<Location> locationsOnRoute;
 
-    @OneToMany(mappedBy = "guidedTour")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "route")
     private List<GuidedTour> guidedTours;
 
     public Route(){}

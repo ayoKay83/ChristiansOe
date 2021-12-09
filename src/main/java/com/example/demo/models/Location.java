@@ -18,11 +18,9 @@ public class Location {
     @Column(name = "location_id")
     private int locationId;
 
-    @Column(name = "name")
     private String name;
-    @Column(name = "xpos")
+    private String description;
     private double xpos;
-    @Column(name = "ypos")
     private double ypos;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -46,16 +44,18 @@ public class Location {
     public Location() {
     }
 
-    public Location(int locationId, String name, double xpos, double ypos) {
+    public Location(int locationId, String name, String description, double xpos, double ypos) {
         this.locationId = locationId;
         this.name = name;
+        this.description = description;
         this.xpos = xpos;
         this.ypos = ypos;
     }
 
-    public Location(int locationId, String name, double xpos, double ypos, List<Attraction> attractions, List<Quiz> quiz, List<Route> routes) {
+    public Location(int locationId, String name, String description, double xpos, double ypos, List<Attraction> attractions, List<Quiz> quiz, List<Route> routes) {
         this.locationId = locationId;
         this.name = name;
+        this.description = description;
         this.xpos = xpos;
         this.ypos = ypos;
         this.attractions = attractions;
@@ -65,6 +65,18 @@ public class Location {
 
     public int getLocationId() {
         return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {

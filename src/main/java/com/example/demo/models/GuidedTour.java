@@ -8,8 +8,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        //property = "guidedtourId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "guidedtourId")
 @Entity
 public class GuidedTour {
 
@@ -24,12 +24,10 @@ public class GuidedTour {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="route_id", nullable = false)
-    @JsonBackReference
     private Route route;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="filemanager_id", nullable = false)
-    @JsonBackReference
     private FileManager fileManager;
 
     public GuidedTour(){}
