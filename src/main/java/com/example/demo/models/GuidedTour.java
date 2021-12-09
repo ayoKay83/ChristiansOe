@@ -1,11 +1,15 @@
 package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        //property = "guidedtourId")
 @Entity
 public class GuidedTour {
 
