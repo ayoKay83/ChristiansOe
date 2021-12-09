@@ -2,6 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin=""/>
@@ -13,10 +20,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <style>
 
@@ -38,50 +45,7 @@
             height: 100%;
         }
 
-        /* Modal Sidebar */
 
-        .modal.left .modal-dialog {
-            position: fixed;
-            margin: auto;
-            width: 30%;
-            height: 100%;
-            -webkit-transform: translate3d(0%, 0, 0);
-            -ms-transform: translate3d(0%, 0, 0);
-            -o-transform: translate3d(0%, 0, 0);
-            transform: translate3d(0%, 0, 0);
-        }
-
-        .modal.left .modal-content {
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        .modal.left .modal-body {
-            padding: 15px 15px 80px;
-        }
-
-
-        .modal.left.fade .modal-dialog {
-            left: -320px;
-            -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-            -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-            -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-            transition: opacity 0.3s linear, left 0.3s ease-out;
-        }
-
-        .modal.left.fade.in .modal-dialog {
-            left: 0;
-        }
-
-        .modal-content {
-            border-radius: 0;
-            border: none;
-        }
-
-        .modal-header {
-            border-bottom-color: #EEEEEE;
-            background-color: #FAFAFA;
-        }
 
         .modal-backdrop {
             background-color: transparent;
@@ -107,12 +71,14 @@
 <!-- Modal EMPTY-->
 <div aria-labelledby="myModalLabel" class="modal left fade" id="emptymodal" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
-        <div class="modal-content"></div>
-        <!-- modal-content -->
+        <div class="modal-content"></div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+    <div class="modal-footer">
+        <button id="btn-attractions" type="button" class="btn btn-primary" data-bs-dismiss="modal">Attractions</button>
+        <button id="btn-tours" type="button" class="btn btn-primary" data-bs-dismiss="modal">Show guided tours</button>
     </div>
-    <!-- modal-dialog -->
-</div>
-<!-- modal -->
+</div><!-- modal -->
+
 </body>
 
 <script>
@@ -126,7 +92,7 @@
     /*Include the marker data and create the layers */
     let pinData = [
         //et sted
-        ["urban", "1", 55.32037, 15.18821],
+        ["urban", "Christiansø sildevogn", 55.32037, 15.18821],
         //et andet sted
         ["ocean", "2", 55.31637, 15.18911],
         //et tredje sted
@@ -141,7 +107,7 @@
 
     /* Create layers with different colors or pictures */
     let urban = new L.LayerGroup();
-    for (var i = 0; i < pinData.length; i++) {
+    for (let i = 0; i < pinData.length; i++) {
         if (pinData[i][0] == "urban") {
             marker = new PlaceMarker([pinData[i][2], pinData[i][3]], {
                 color: "#999999",
@@ -150,7 +116,7 @@
         }
     }
     let ocean = new L.LayerGroup();
-    for (var i = 0; i < pinData.length; i++) {
+    for (let i = 0; i < pinData.length; i++) {
         if (pinData[i][0] == "ocean") {
             marker = new PlaceMarker([pinData[i][2], pinData[i][3]], {
                 color: "#00FFFF",
@@ -159,7 +125,7 @@
         }
     }
     let nature = new L.LayerGroup();
-    for (var i = 0; i < pinData.length; i++) {
+    for (let i = 0; i < pinData.length; i++) {
         if (pinData[i][0] == "nature") {
             marker = new PlaceMarker([pinData[i][2], pinData[i][3]], {
                 color: "#008000",
@@ -167,25 +133,26 @@
             }).addTo(nature).on('click', markerOnClick);
         }
     }
-    /* Some handy variables*/
-    let booklayers = [urban, ocean, nature]
+
+    /* Some variables*/
+    let myMapLayers = [urban, ocean, nature]
 
 
     /*Initialize map; and change Lat & Lang to Christians Ø*/
     let x = 55.32037
     let y = 15.18821
     let z = 16
-    let mymap = L.map('map', {
-        layers: booklayers
+    let myMap = L.map('map', {
+        layers: myMapLayers
     }).setView([x, y], z);
-    mymap.zoomControl.setPosition('bottomright');
+    myMap.zoomControl.setPosition('bottomright');
 
     /*Add tileLayers from openstreetmap*/
     mapLink = '<a href="http://openstreetmap.org">OpenStreetMap<\/a>';
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; ' + mapLink + ' Christiansø Map',
         maxZoom: 18,
-    }).addTo(mymap);
+    }).addTo(myMap);
 
     /*init function to prevent markerOnClick to interact with mapClick */
     function init() {
@@ -205,14 +172,14 @@
     /* Create modal & center map on marker */
     function markerOnClick(e) {
         let id = this.options.id;
-        $(".modal-content").html('This is marker ' + id);
+        $('.modal-content').html(id);
         $('#emptymodal').modal('show');
-        mymap.setView(e.target.getLatLng());
+        myMap.setView(e.target.getLatLng());
         init();
     }
 
     /* Close modal when clicking on the map */
-    mymap.on('click', mapClick);
+    myMap.on('click', mapClick);
 
 </script>
 </html>

@@ -42,6 +42,7 @@ public class Location {
             inverseJoinColumns = @JoinColumn(name = "route_id"))
     private List<Route> routes;
 
+
     public Location() {
     }
 
