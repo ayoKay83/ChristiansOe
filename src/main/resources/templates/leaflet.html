@@ -26,7 +26,6 @@
 
 
     <style>
-
         html,
         body,
         #container {
@@ -45,7 +44,23 @@
             height: 100%;
         }
 
-
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            -webkit-animation-name: fadeIn; /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s
+        }
 
         .modal-backdrop {
             background-color: transparent;
@@ -61,7 +76,9 @@
             pointer-events: auto;
         }
 
-
+        .modal-text {
+            pointer-events: auto;
+        }
     </style>
 
 </head>
@@ -69,15 +86,22 @@
 <div id="map"></div>
 
 <!-- Modal EMPTY-->
-<div aria-labelledby="myModalLabel" class="modal left fade" id="emptymodal" role="dialog" tabindex="-1">
+<div class="modal"></div>
+<div aria-labelledby="myModalLabel" class="modal fade" id="emptymodal" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
-        <div class="modal-content"></div><!-- modal-content -->
-    </div><!-- modal-dialog -->
-    <div class="modal-footer">
-        <button id="btn-attractions" type="button" class="btn btn-primary" data-bs-dismiss="modal">Attractions</button>
-        <button id="btn-tours" type="button" class="btn btn-primary" data-bs-dismiss="modal">Show guided tours</button>
+        <div>
+            <div class="modal-content"></div><!-- modal-content -->
+            <div class="modal-text"></div>
+            <div class="modal-footer">
+                <button id="btn-attractions" type="button" class="btn btn-primary" data-bs-dismiss="modal">Attractions</button>
+                <button id="btn-tours" type="button" class="btn btn-primary" data-bs-dismiss="modal">Guided tours</button>
+            </div>
+            <!-- modal-dialog -->
+
+
+        </div>
     </div>
-</div><!-- modal -->
+</div>
 
 </body>
 
@@ -86,13 +110,18 @@
     /*Custom marker */
     PlaceMarker = L.CircleMarker.extend({
         options: {
-            id: ''
+            id: '',
+            text: ''
         }
     });
+
+
+
+
     /*Include the marker data and create the layers */
     let pinData = [
         //et sted
-        ["urban", "Christiansø sildevogn", 55.32037, 15.18821],
+        ["urban", "Christiansø sildevogn", 55.32037, 15.18821, ],
         //et andet sted
         ["ocean", "2", 55.31637, 15.18911],
         //et tredje sted
@@ -111,7 +140,8 @@
         if (pinData[i][0] == "urban") {
             marker = new PlaceMarker([pinData[i][2], pinData[i][3]], {
                 color: "#999999",
-                id: pinData[i][1]
+                id: pinData[i][1],
+                text: pinData[i][4]
             }).addTo(urban).on('click', markerOnClick);
         }
     }
@@ -172,7 +202,9 @@
     /* Create modal & center map on marker */
     function markerOnClick(e) {
         let id = this.options.id;
+        let text = this.options.text;
         $('.modal-content').html(id);
+        $('.modal-text').html(text);
         $('#emptymodal').modal('show');
         myMap.setView(e.target.getLatLng());
         init();
