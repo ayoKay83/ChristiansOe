@@ -1,6 +1,4 @@
 package com.example.demo.controllers;
 
-public class IslandMapController {
-
-
+public class GuidedTourController {
 }
