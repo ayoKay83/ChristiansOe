@@ -108,7 +108,7 @@
                     showPolygonArea({ layer: layer })
                 });
                 L.Polyline = L.Polyline.include({
-                    getDistance: function(system) {
+                    getDistance: function (system) {
                         // distance in meters
                         var mDistanse = 0,
                             length = this._latlngs.length;
@@ -127,6 +127,9 @@
                         } else {
                             return mDistanse / 1000;
                         }
-                    });
-
+                    }
+                }
+            }
+        }
+    }
     </script>
