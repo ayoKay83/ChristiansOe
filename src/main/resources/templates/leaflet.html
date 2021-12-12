@@ -198,6 +198,15 @@
             $('.modal').modal('hide');
         }
     }
+    /* routes on map using polyline */
+    let polylinePoints = [
+        [55.32037, 15.18821],
+        [55.32237, 15.18641]
+    ];
+
+    let polyline = L.polyline(polylinePoints).addTo(myMap);
+
+
 
     /* Create modal & center map on marker */
     function markerOnClick(e) {
