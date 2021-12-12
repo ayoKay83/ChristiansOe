@@ -22,6 +22,7 @@ public class LocationController {
     public List<Location> allLocations() {
         return locationRepository.findAll();
     }
+
     @GetMapping("/{id}")
     public Location locationById(@PathVariable int id){
         return locationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Location with id: " + id + " not found"));
