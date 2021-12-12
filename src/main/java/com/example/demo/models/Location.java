@@ -22,6 +22,7 @@ public class Location {
     private String description;
     private double xpos;
     private double ypos;
+    private String frontImage;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -44,20 +45,22 @@ public class Location {
     public Location() {
     }
 
-    public Location(int locationId, String name, String description, double xpos, double ypos) {
+    public Location(int locationId, String name, String description, double xpos, double ypos, String frontImage) {
         this.locationId = locationId;
         this.name = name;
         this.description = description;
         this.xpos = xpos;
         this.ypos = ypos;
+        this.frontImage = frontImage;
     }
 
-    public Location(int locationId, String name, String description, double xpos, double ypos, List<Attraction> attractions, List<Quiz> quiz, List<Route> routes) {
+    public Location(int locationId, String name, String description, double xpos, double ypos, String frontImage, List<Attraction> attractions, List<Quiz> quiz, List<Route> routes) {
         this.locationId = locationId;
         this.name = name;
         this.description = description;
         this.xpos = xpos;
         this.ypos = ypos;
+        this.frontImage = frontImage;
         this.attractions = attractions;
         this.quiz = quiz;
         this.routes = routes;
@@ -125,6 +128,14 @@ public class Location {
 
     public void setRoutes(List<Route> routes) {
         this.routes = routes;
+    }
+
+    public String getFrontImage() {
+        return frontImage;
+    }
+
+    public void setFrontImage(String frontImage) {
+        this.frontImage = frontImage;
     }
 
     //metode der kan tjekke om 2 objekter er ens, og som pt tjekker på navn
