@@ -1,127 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-          crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-            crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-
-
-    <style>
-        html,
-        body,
-        #container {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            width: auto;
-            height: 100%;
-        }
-
-    </style>
-
+    <!-- stylesheets og template fra https://embed.plnkr.co/plunk/wH7u64 -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.label/leaflet.label.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 </head>
+
 <body>
-<div id="map"></div>
-
-
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a>Map</a>
+                </li>
+                <li>
+                    <a>Routes</a>
+                </li>
+                <li>
+                    <a>Nature</a>
+                </li>
+                <li>
+                    <a id="ferry-timer">Time to next ferry: 12min</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="container">
+    <div id="sidebar">
+        <div class="sidebar-wrapper">
+            <div id="features" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Routes</h3>
+                    <p>Here you can find all the routes that you can go on.</p>
+                    <button id="route-1" style="box-sizing: content-box; width: 75%">Øl Ruten</button>
+                    <button id="route-2"style="box-sizing: content-box; width: 75%">Tårn Ruten</button>
+                    <button id="route-3"style="box-sizing: content-box; width: 75%">Silde Ruten</button>
+                    <button id="route-4"style="box-sizing: content-box; width: 75%">Blomster Ruten</button>
+                    <button id="route-5"style="box-sizing: content-box; width: 75%">Naturlivs Ruten</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+</div>
+<!-- scripts fra https://embed.plnkr.co/plunk/wH7u64 -->
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet-src.js"></script>
+<script src="http://leaflet.github.io/Leaflet.label/leaflet.label.js"></script>
+<script src="script.js"></script>
 </body>
-
-<script>
-
-
-
-    /*Include the marker data and create the layers */
-    let pinData = [
-        //et sted
-        ["/templates/red.png", "Christiansø sildevogn", 55.32037, 15.18821, "hfdhasfihsd"],
-        //et andet sted
-        ["ocean", "2", 55.31637, 15.18911, "fdjsdifoiwj"],
-        //et tredje sted
-        ["urban", "3", 55.32237, 15.18641, "fdjsdifoiwj"],
-        //et helt andet sted
-        ["ocean", "4", 55.31838, 15.18611, "fdjsdifoiwj"],
-        //et fantastisk sted
-        ["ocean", "5", 55.31625, 15.19115, "fdjsdifoiwj"],
-        //Verdenens Ende
-        ["nature", "6", 55.32290, 15.19100, "fdjsdifoiwj"]
-    ];
-
-
-
-    const location_desc_url = 'http://localhost:8080/locations/'
-    async function getDescription(id){
-        const response = await fetch(location_desc_url + id);
-        const data = await response.json();
-        const text = data.description;
-        return text;
-    }
-
-
-    /* Create layers with different colors or pictures */
-
-    let myMarker = new L.LayerGroup();
-    for (let i = 0; i < pinData.length; i++){
-        locationMarker = L.marker([pinData[i][2], pinData[i][3]]
-        ).bindPopup("<h1>" + pinData[i][1] + "</h1> <p>" + pinData[i][4] +
-            "</p> <img src=" + pinData[i][0] + ">").addTo(myMarker);
-    }
-
-    /*Initialize map; and change Lat & Lang to Christiansø*/
-    let x = 55.32037
-    let y = 15.18821
-    let z = 16
-    let myMap = L.map('map', {
-        layers: myMarker
-    }).setView([x, y], z);
-    myMap.zoomControl.setPosition('bottomright');
-
-    /*Add tileLayers from openstreetmap*/
-    mapLink = '<a href="http://openstreetmap.org">OpenStreetMap<\/a>';
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; ' + mapLink + ' Christiansø Map',
-        maxZoom: 18,
-    }).addTo(myMap);
-
-    /*init function to prevent markerOnClick to interact with mapClick */
-    function init() {
-        init.called = true;
-    }
-
-    /* mapClick function */
-    function mapClick () {
-        if(init.called) {
-            init.called = false;
-        }
-        else{
-            $('.modal').modal('hide');
-        }
-    }
-
-    /* routes on map using polyline */
-    let polylinePoints = [
-        [55.32037, 15.18821],
-        [55.32237, 15.18641]
-    ];
-
-    let polyline = L.polyline(polylinePoints).addTo(myMap);
-
-    /* Close modal when clicking on the map */
-    myMap.on('click', mapClick);
-
-</script>
 </html>
