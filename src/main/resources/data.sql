@@ -4,7 +4,7 @@ INSERT INTO LOCATION (DESCRIPTION, NAME, XPOS, YPOS, FRONT_IMAGE) VALUES
 ('Kongens Bastion er en af de større bastioner på Christiansø, der blev anvendt til at forsvare søfæstningen.', 'Kongens Bastion', 55.317951798938815, 15.18846718246784,'/img/locations/kongens_bastion_linje4.jpeg'),
 ('Her fra Søfæstning Christiansøs højeste punkt har du mange muligheder for at indfange flotte motiver.', 'Møllebakken', 55.31925046535832, 15.189068364811785,'/img/locationsden/møllebakken_linje5.jpeg'),
 ('Når du har set Store Tårn, skal du også besøge museet på Lille Tårn på Frederiksø.', 'Lille Tårn på Frederiksø ', 55.322329613419015, 15.18371101745431,'/img/locationsden/lilletaarn_linje6.jpeg'),
-('Rå kystlinje, der markerer Danmarks østligste punkt, og som nås via sammenfaldne volde.', 'Danmarks østligste punkt', 55.32042167575228, 15.192973332532961,'/img/locations/danmarks_oestligste_punkt_linje7.jpeg');
-('Hyggelig atmosfære især for børnefamilier', 'Badebro', 55.321395545051864, 15.183469049589627,'/img/locations/badebro_linje8.jpeg');
-('Historisk butik med de fineste suiveniere til familien og vennerne derhjemme', 'Sirenehuset', 55.32025983744189, 15.1868082958823,'/img/locations/sirenehuset_linje9.jpeg');
+('Rå kystlinje, der markerer Danmarks østligste punkt, og som nås via sammenfaldne volde.', 'Danmarks østligste punkt', 55.32042167575228, 15.192973332532961,'/img/locations/danmarks_oestligste_punkt_linje7.jpeg'),
+('Hyggelig atmosfære især for børnefamilier', 'Badebro', 55.321395545051864, 15.183469049589627,'/img/locations/badebro_linje8.jpeg'),
+('Historisk butik med de fineste suiveniere til familien og vennerne derhjemme', 'Sirenehuset', 55.32025983744189, 15.1868082958823,'/img/locations/sirenehuset_linje9.jpeg'),
 ('Elsker du sild, så skal du absolut besøge denne fiske handler', 'Christiansøpigens Sild', 55.13758721062028, 15.145363403031045,'/img/locations/pigensSild.png');

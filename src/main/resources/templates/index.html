@@ -41,57 +41,54 @@
 </head>
 <body>
 <div id="map"></div>
-
-
 </body>
-
 <script>
 
 
-    /*Include the marker data and create the layers */
-    let pinData = [
-        //et sted
-        ["/img/locations/pigensSild.png", "Christiansø Pigens Sild", 55.32037, 15.18821, "getDescription(1)"],
-        //et andet sted
-        ["/img/locations/pigensSild.png", "2", 55.31637, 15.18911, "fdjsdifoiwj"],
-        //et tredje sted
-        ["/img/locations/pigensSild.png", "3", 55.32237, 15.18641, "fdjsdifoiwj"],
-        //et helt andet sted
-        ["/img/locations/pigensSild.png", "4", 55.31838, 15.18611, "fdjsdifoiwj"],
-        //et fantastisk sted
-        ["/img/locations/pigensSild.png", "5", 55.31625, 15.19115, "fdjsdifoiwj"],
-        //Verdenens Ende
-        ["/img/locations/pigensSild.png", "6", 55.32290, 15.19100, "fdjsdifoiwj"]
-    ];
+    //Fetch Location data
+    async function fetchAllLocationData(){
+        let array = []
+        let res = await fetch('http://localhost:8080/locations/');
+        let responseData = await res.json();
 
-
-
-    const location_desc_url = 'http://localhost:8080/locations/'
-    //async function getDescription(id){
-    //    const response = await fetch(location_desc_url + id);
-    //    const data = await response.json();
-    //    const text = data.description;
-    //    return text;
-    //}
-
-    fetch(location_desc_url)
-        .then(response => {
-            return response.json();
+        responseData.forEach(data => {
+            array.push(data);
         })
-        .then(data => console.log(data));
-
-
-    /* Create layers with different colors or pictures */
-
-    let myMarker = new L.LayerGroup();
-    for (let i = 0; i < pinData.length; i++){
-        locationMarker = L.marker([pinData[i][2], pinData[i][3]]
-        ).bindPopup("<h1>" + pinData[i][1] + "</h1> <p>" + pinData[i][4] +
-            "</p> <img height='200px' width='auto' src=" + pinData[i][0] + ">" +
-            "<button id='guided-tour'>Guided tours</button>").addTo(myMarker);
+        return array
     }
 
-    /*Initialize map; and change Lat & Lang to Christiansø*/
+    //Insert fetchAllLocationData data array into pinData array
+    const pinData = fetchAllLocationData()
+
+
+
+
+    /* Create pins and their popups*/
+    let myMarker = new L.LayerGroup();
+    for (let i = 0; i < pinData.length; i++) {
+        locationMarker = L.marker([pinData[i][2], pinData[i][3]]
+        ).bindPopup("<h1>" + pinData[i][1] + "</h1> " +
+            "<p>" + pinData[i][0] + "</p>" +
+            "<img height='200px' src=" + pinData[i][4] + ">" +
+            "<button id='guided-tour'>Ruter og Guides</button>" +
+            "<button id='nature' >Naturen</button>" +
+            "<br>" +
+            "<br>" +
+            "<div>" +
+            "<h2>Forslåede ruter og ture</h2>" +
+            "<p>Her kan du finde de mest populære ruter til forskellige guidede ture.</p>" +
+            "<input type='image' height='100px' style='border: transparent 10px' src=" + pinData[i][4] + ">" +
+            "<input type='image' height='100px' src=" + pinData[i][4] + ">" +
+            "<input type='image' height='100px' src=" + pinData[i][4] + ">" +
+            "<input type='image' height='100px' src=" + pinData[i][4] + ">" +
+            "</div>")
+            .addTo(myMarker)
+    }
+
+
+
+
+    //Initialize map; and change Lat & Lang to Christiansø
     let x = 55.32037
     let y = 15.18821
     let z = 16
@@ -100,38 +97,27 @@
     }).setView([x, y], z);
     myMap.zoomControl.setPosition('bottomright');
 
-    /*Add tileLayers from openstreetmap*/
+
+    //Add tileLayers from openstreetmap
     mapLink = '<a href="http://openstreetmap.org">OpenStreetMap<\/a>';
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; ' + mapLink + ' Christiansø Map',
         maxZoom: 18,
     }).addTo(myMap);
 
-    /*init function to prevent markerOnClick to interact with mapClick */
-    function init() {
-        init.called = true;
+
+    //Ryk polyline
+    for (let i = 0; i < pinData.length; i++) {
+        /* routes on map using polyline */
+        let polylinePoints = [
+            [55.32037, 15.18821],
+            [55.32237, 15.18641],
+
+        ];
+
+        let polyline = L.polyline(polylinePoints).addTo(myMap);
     }
 
-    /* mapClick function */
-    function mapClick () {
-        if(init.called) {
-            init.called = false;
-        }
-        else{
-            $('.modal').modal('hide');
-        }
-    }
-
-    /* routes on map using polyline */
-    let polylinePoints = [
-        [55.32037, 15.18821],
-        [55.32237, 15.18641]
-    ];
-
-    let polyline = L.polyline(polylinePoints).addTo(myMap);
-
-    /* Close modal when clicking on the map */
-    myMap.on('click', mapClick);
 
 </script>
 </html>
