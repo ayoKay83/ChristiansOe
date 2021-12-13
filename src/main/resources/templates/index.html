@@ -1,165 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-          crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-            crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-
-
-    <style>
-        html,
-        body,
-        #container {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            width: auto;
-            height: 100%;
-        }
-
-        .leaflet-popup-content {
-            width:auto !important;
-        }
-
-    </style>
-
+    <!-- stylesheets og template fra https://embed.plnkr.co/plunk/wH7u64 -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.label/leaflet.label.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 </head>
+
 <body>
-<div id="map"></div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a>Map</a>
+                </li>
+                <li>
+                    <a>Attractions</a>
+                </li>
+                <li>
+                    <a>Nature</a>
+                </li>
+                <li>
+                    <a id="ferry-timer">Time to next ferry: 12min</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="container">
+    <div id="sidebar">
+        <div class="sidebar-wrapper">
+            <div id="features" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Routes</h3>
+                    <p>Here you can find all the routes that you can go on.</p>
+                    <button id="route-1" style="box-sizing: content-box; width: 90%; height: 60px">
+                        Øl Ruten
+                    </button>
+                    <button id="route-2" style="box-sizing: content-box; width: 90%; height: 60px">
+                        Tårn Ruten
+                    </button>
+                    <button id="route-3" style="box-sizing: content-box; width: 90%; height: 60px">
+                        Silde Ruten
+                    </button>
+                    <button id="route-4" style="box-sizing: content-box; width: 90%; height: 60px">
+                        Blomster Ruten
+                    </button>
+                    <button id="route-5" style="box-sizing: content-box; width: 90%; height: 60px">
+                        Naturlivs Ruten
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+</div>
+<!-- scripts fra https://embed.plnkr.co/plunk/wH7u64 -->
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet-src.js"></script>
+<script src="http://leaflet.github.io/Leaflet.label/leaflet.label.js"></script>
+<script src="script.js"></script>
 </body>
-<script>
-
-
-   // async function fetchAllLocationData(){
-   //     let array = []
-   //     let res = await fetch('http://localhost:8080/locations/');
-   //     let responseData = await res.json();
-//
-   //     responseData.forEach(data => {
-   //         array.push(data);
-   //     })
-   //     return array
-   // }
-//
-   // const pinData = fetchAllLocationData()
-//
-   // console.log(pinData)
-
-    //
-    // const pinDataTest2 = function getDescription() {
-    //     let array = []
-    //     fetch(location_desc_url)
-    //        .then(res => res.json())
-    //        .then(locations => { array.forEach(data)
-//
-    //        })
-    //     return array
-    //}
-//
-    //Promise.all(
-    //    // use the urls to create an array of promises
-    //    pinDataTest.map(getDescription)
-    //).then((test) => {
-    //    // When all the promises have been resolved, then this will be executed
-    //    //Here all the promises have been resolved, so you would have an array with the ttTimes
-    //    console.log(test);
-    //})
-
-
-    /*Include the marker data and create the layers */
-    let pinData = [
-        ['Det over 330 år gamle Store Tårn på Christiansø har en bevæget historie som fæstningsværk bag sig.', 'Nyrenoverede Store Tårn', 55.32064521446226, 15.187448061725942,'/img/locations/den_store_taarn_linje2.jpeg'],
-        ['Sangen "Ud på flisen, Karoline" om tjeneren Laurits og bogholderske Frøken Karoline blev landskendt i 1958, smag berømmelsen på kroen.', 'Kroen Ud på flisen, Karoline', 55.32083977341514, 15.186497194737282,'/img/locations/ud_paa_flisen_linje3.jpeg'],
-        ['Kongens Bastion er en af de større bastioner på Christiansø, der blev anvendt til at forsvare søfæstningen.', 'Kongens Bastion', 55.317951798938815, 15.18846718246784,'/img/locations/kongens_bastion_linje4.jpeg'],
-        ['Her fra Søfæstning Christiansøs højeste punkt har du mange muligheder for at indfange flotte motiver.', 'Møllebakken', 55.31925046535832, 15.189068364811785,'/img/locations/møllebakken_linje5.jpeg'],
-        ['Når du har set Store Tårn, skal du også besøge museet på Lille Tårn på Frederiksø.', 'Lille Tårn på Frederiksø ', 55.322329613419015, 15.18371101745431,'/img/locations/lilletaarn_linje6.jpeg'],
-        ['Rå kystlinje, der markerer Danmarks østligste punkt, og som nås via sammenfaldne volde.', 'Danmarks østligste punkt', 55.32042167575228, 15.192973332532961,'/img/locations/danmarks_oestligste_punkt_linje7.jpeg'],
-        ['Hyggelig atmosfære især for børnefamilier.', 'Badebro', 55.321395545051864, 15.183469049589627,'/img/locations/badebro_linje8.jpeg'],
-        ['Historisk butik med de fineste suiveniere til familien og vennerne derhjemme.', 'Sirenehuset', 55.32025983744189, 15.1868082958823,'/img/locations/sirenehuset_linje9.jpeg'],
-        ['Elsker du sild, så skal du absolut besøge denne fiske handler.', 'Christiansøpigens Sild', 55.13758721062028, 15.145363403031045,'/img/locations/pigensSild.png']
-    ];
-
-    let locationPictures = [
-        ['hv']
-    ];
-
-
-
-
-    /* Create pins and their popups*/
-
-    let myMarker = new L.LayerGroup();
-    for (let i = 0; i < pinData.length; i++) {
-        locationMarker = L.marker([pinData[i][2], pinData[i][3]]
-        ).bindPopup("<h1>" + pinData[i][1] + "</h1> " +
-            "<p>" + pinData[i][0] + "</p>" +
-            "<img height='200px' src=" + pinData[i][4] + ">" +
-            "<button id='guided-tour'>Ruter og Guides</button>" +
-            "<button id='nature' >Naturen</button>" +
-            "<br>" +
-            "<br>" +
-            "<div>" +
-            "<h2>Forslåede ruter og ture</h2>" +
-            "<p>Her kan du finde de mest populære ruter til forskellige guidede ture.</p>" +
-            "<input type='image' height='100px' style='border: transparent 10px' src=" + pinData[i][4] + ">" +
-            "<input type='image' height='100px' src=" + pinData[i][4] + ">" +
-            "<input type='image' height='100px' src=" + pinData[i][4] + ">" +
-            "<input type='image' height='100px' src=" + pinData[i][4] + ">" +
-            "</div>")
-            .addTo(myMarker)
-    }
-
-
-
-
-    /*Initialize map; and change Lat & Lang to Christiansø*/
-    let x = 55.32037
-    let y = 15.18821
-    let z = 16
-    let myMap = L.map('map', {
-        layers: myMarker
-    }).setView([x, y], z);
-    myMap.zoomControl.setPosition('bottomright');
-
-    //myMap.on('popupopen', function() {
-    //    getDescription()
-    //});
-
-    /*Add tileLayers from openstreetmap*/
-    mapLink = '<a href="http://openstreetmap.org">OpenStreetMap<\/a>';
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; ' + mapLink + ' Christiansø Map',
-        maxZoom: 18,
-    }).addTo(myMap);
-
-    for (let i = 0; i < pinData.length; i++) {
-        /* routes on map using polyline */
-        let polylinePoints = [
-            [55.32037, 15.18821],
-            [55.32237, 15.18641],
-
-        ];
-
-        let polyline = L.polyline(polylinePoints).addTo(myMap);
-    }
-
-
-
-
-</script>
 </html>
