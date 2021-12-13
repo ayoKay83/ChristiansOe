@@ -16,7 +16,7 @@ body {
     float: left;
     height: 100%;
     max-width: 100%;
-    width: 150px;
+    width: 15%;
 }
 
 #map {
@@ -40,3 +40,4 @@ body {
         display: none;
     }
 }
+
