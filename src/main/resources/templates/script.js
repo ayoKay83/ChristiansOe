@@ -38,13 +38,13 @@ function main() {
 
     /* Create pins and their popups*/
 
-    let myMarker = new L.LayerGroup();
+    let myMarkerLayer = new L.LayerGroup();
     for (let i = 0; i < pinData.length; i++) {
         locationMarker = L.marker([pinData[i][2], pinData[i][3]]
         ).bindPopup("<h1>" + pinData[i][1] + "</h1> " +
             "<img height='200px' src=" + pinData[i][4] + ">" +
             "<p>" + pinData[i][0] + "</p>"
-        ).addTo(myMarker)
+        ).addTo(myMarkerLayer)
     }
 
     /*Initialize map; and change Lat & Lang to Christiansø*/
@@ -52,7 +52,7 @@ function main() {
     let y = 15.18821
     let z = 16
     let myMap = L.map('map', {
-        layers: myMarker
+        layers: myMarkerLayer
     }).setView([x, y], z);
     myMap.zoomControl.setPosition('bottomright');
 
