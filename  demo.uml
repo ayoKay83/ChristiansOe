@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/knj/Desktop/KEA/1. Semester/GitRepositories/ChristiansOe/src/main/java/com/example/demo</OriginalElement>
+  <nodes>
+    <node x="228.0" y="1022.0">com.example.demo.controllers.RouteController</node>
+    <node x="0.0" y="878.0">com.example.demo.models.Ferry</node>
+    <node x="749.7698412698413" y="22.0">com.example.demo.models.Nature</node>
+    <node x="0.0" y="1022.0">com.example.demo.controllers.NatureController</node>
+    <node x="36.5" y="790.5">com.example.demo.repositories.RouteRepository</node>
+    <node x="255.0" y="878.0">com.example.demo.models.GeomappingLocation</node>
+    <node x="705.25" y="778.0">com.example.demo.controllers.LocationController</node>
+    <node x="823.0" y="639.0">com.example.demo.repositories.LocationRepository</node>
+    <node x="276.0" y="639.0">com.example.demo.repositories.GuidedTourRepository</node>
+    <node x="805.0" y="878.0">com.example.demo.controllers.GuidedTourController</node>
+    <node x="419.157738095238" y="-11.0">com.example.demo.models.Quiz</node>
+    <node x="761.2698412698413" y="348.0">com.example.demo.repositories.NatureRepository</node>
+    <node x="665.0" y="1022.0">com.example.demo.controllers.QuizController</node>
+    <node x="523.0" y="639.0">com.example.demo.exceptions.ResourceNotFoundException</node>
+    <node x="519.0" y="878.0">com.example.demo.ChristiansOeApplication</node>
+    <node x="512.4077380952381" y="236.0">com.example.demo.models.Location</node>
+    <node x="0.0" y="582.0">com.example.demo.models.Route</node>
+    <node x="79.77480158730145" y="11.0">com.example.demo.models.FileManager</node>
+    <node x="89.27480158730145" y="280.5">com.example.demo.models.GuidedTour</node>
+    <node x="449.0" y="1022.0">com.example.demo.controllers.FerryController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.example.demo.models.GuidedTour" target="com.example.demo.models.Route" relationship="DEPENDENCY">
+      <point x="50.5" y="82.5" />
+      <point x="240.77480158730145" y="511.0" />
+      <point x="465.27480158730145" y="511.0" />
+      <point x="465.27480158730145" y="521.0" />
+      <point x="475.27480158730145" y="521.0" />
+      <point x="475.27480158730145" y="561.0" />
+      <point x="192.0" y="561.0" />
+      <point x="64.0" y="-72.0" />
+    </edge>
+    <edge source="com.example.demo.models.Route" target="com.example.demo.models.GuidedTour" relationship="DEPENDENCY">
+      <point x="64.0" y="-72.0" />
+      <point x="192.0" y="561.0" />
+      <point x="475.27480158730145" y="561.0" />
+      <point x="475.27480158730145" y="521.0" />
+      <point x="465.27480158730145" y="521.0" />
+      <point x="465.27480158730145" y="511.0" />
+      <point x="240.77480158730145" y="511.0" />
+      <point x="50.5" y="82.5" />
+    </edge>
+    <edge source="com.example.demo.controllers.LocationController" target="com.example.demo.repositories.LocationRepository" relationship="TO_ONE">
+      <point x="0.0" y="-27.5" />
+      <point x="850.25" y="757.0" />
+      <point x="874.0" y="757.0" />
+      <point x="-51.0" y="15.0" />
+    </edge>
+    <edge source="com.example.demo.models.Quiz" target="com.example.demo.models.Location" relationship="DEPENDENCY">
+      <point x="66.25" y="83.0" />
+      <point x="617.9077380952381" y="216.0" />
+      <point x="663.1577380952381" y="216.0" />
+      <point x="50.25" y="-127.0" />
+    </edge>
+    <edge source="com.example.demo.models.Location" target="com.example.demo.models.Quiz" relationship="DEPENDENCY">
+      <point x="50.25" y="-127.0" />
+      <point x="663.1577380952381" y="216.0" />
+      <point x="617.9077380952381" y="216.0" />
+      <point x="66.25" y="83.0" />
+    </edge>
+    <edge source="com.example.demo.controllers.LocationController" target="com.example.demo.models.Location" relationship="DEPENDENCY">
+      <point x="96.66666666666674" y="-27.5" />
+      <point x="946.9166666666667" y="757.0" />
+      <point x="959.7748015873015" y="757.0" />
+      <point x="959.7748015873015" y="747.0" />
+      <point x="1037.5" y="747.0" />
+      <point x="1037.5" y="541.0" />
+      <point x="834.5079365079365" y="541.0" />
+      <point x="834.5079365079365" y="531.0" />
+      <point x="663.1577380952381" y="531.0" />
+      <point x="50.25" y="127.0" />
+    </edge>
+    <edge source="com.example.demo.models.Location" target="com.example.demo.models.Quiz" relationship="TO_MANY">
+      <point x="-50.25" y="-127.0" />
+      <point x="562.6577380952381" y="216.0" />
+      <point x="607.9077380952381" y="216.0" />
+      <point x="607.9077380952381" y="186.0" />
+      <point x="485.4077380952381" y="186.0" />
+      <point x="-66.25" y="83.0" />
+    </edge>
+    <edge source="com.example.demo.repositories.GuidedTourRepository" target="com.example.demo.models.GuidedTour" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.0" />
+      <point x="389.5" y="531.0" />
+      <point x="465.27480158730145" y="531.0" />
+      <point x="465.27480158730145" y="511.0" />
+      <point x="240.77480158730145" y="511.0" />
+      <point x="50.5" y="82.5" />
+    </edge>
+    <edge source="com.example.demo.models.Quiz" target="com.example.demo.models.Location" relationship="TO_ONE">
+      <point x="-66.25" y="83.0" />
+      <point x="485.4077380952381" y="186.0" />
+      <point x="607.9077380952381" y="186.0" />
+      <point x="607.9077380952381" y="216.0" />
+      <point x="562.6577380952381" y="216.0" />
+      <point x="-50.25" y="-127.0" />
+    </edge>
+    <edge source="com.example.demo.controllers.LocationController" target="com.example.demo.repositories.LocationRepository" relationship="DEPENDENCY">
+      <point x="96.66666666666674" y="-27.5" />
+      <point x="946.9166666666667" y="757.0" />
+      <point x="959.7748015873015" y="757.0" />
+      <point x="959.7748015873015" y="747.0" />
+      <point x="976.0" y="747.0" />
+      <point x="51.0" y="15.0" />
+    </edge>
+    <edge source="com.example.demo.models.GuidedTour" target="com.example.demo.models.Route" relationship="TO_ONE">
+      <point x="-50.5" y="82.5" />
+      <point x="139.77480158730145" y="541.0" />
+      <point x="118.0" y="541.0" />
+      <point x="118.0" y="561.0" />
+      <point x="64.0" y="561.0" />
+      <point x="-64.0" y="-72.0" />
+    </edge>
+    <edge source="com.example.demo.models.Route" target="com.example.demo.models.GuidedTour" relationship="TO_MANY">
+      <point x="-64.0" y="-72.0" />
+      <point x="64.0" y="561.0" />
+      <point x="118.0" y="561.0" />
+      <point x="118.0" y="541.0" />
+      <point x="139.77480158730145" y="541.0" />
+      <point x="-50.5" y="82.5" />
+    </edge>
+    <edge source="com.example.demo.repositories.RouteRepository" target="com.example.demo.models.Route" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="72.0" />
+    </edge>
+    <edge source="com.example.demo.models.Location" target="com.example.demo.models.Nature" relationship="DEPENDENCY">
+      <point x="50.25" y="-127.0" />
+      <point x="663.1577380952381" y="216.0" />
+      <point x="617.9077380952381" y="216.0" />
+      <point x="617.9077380952381" y="206.0" />
+      <point x="855.7698412698413" y="206.0" />
+      <point x="855.7698412698413" y="196.0" />
+      <point x="901.2698412698413" y="196.0" />
+      <point x="50.5" y="61.0" />
+    </edge>
+    <edge source="com.example.demo.models.Nature" target="com.example.demo.models.Location" relationship="DEPENDENCY">
+      <point x="50.5" y="61.0" />
+      <point x="901.2698412698413" y="196.0" />
+      <point x="855.7698412698413" y="196.0" />
+      <point x="855.7698412698413" y="206.0" />
+      <point x="617.9077380952381" y="206.0" />
+      <point x="617.9077380952381" y="216.0" />
+      <point x="663.1577380952381" y="216.0" />
+      <point x="50.25" y="-127.0" />
+    </edge>
+    <edge source="com.example.demo.models.Route" target="com.example.demo.models.Location" relationship="TO_MANY">
+      <point x="-64.0" y="-72.0" />
+      <point x="64.0" y="561.0" />
+      <point x="118.0" y="561.0" />
+      <point x="118.0" y="541.0" />
+      <point x="562.6577380952381" y="541.0" />
+      <point x="-50.25" y="127.0" />
+    </edge>
+    <edge source="com.example.demo.models.Location" target="com.example.demo.models.Route" relationship="TO_MANY">
+      <point x="-50.25" y="127.0" />
+      <point x="562.6577380952381" y="541.0" />
+      <point x="118.0" y="541.0" />
+      <point x="118.0" y="561.0" />
+      <point x="64.0" y="561.0" />
+      <point x="-64.0" y="-72.0" />
+    </edge>
+    <edge source="com.example.demo.models.Nature" target="com.example.demo.models.Location" relationship="TO_MANY">
+      <point x="-50.5" y="61.0" />
+      <point x="800.2698412698413" y="186.0" />
+      <point x="607.9077380952381" y="186.0" />
+      <point x="607.9077380952381" y="216.0" />
+      <point x="562.6577380952381" y="216.0" />
+      <point x="-50.25" y="-127.0" />
+    </edge>
+    <edge source="com.example.demo.models.Location" target="com.example.demo.models.Nature" relationship="TO_MANY">
+      <point x="-50.25" y="-127.0" />
+      <point x="562.6577380952381" y="216.0" />
+      <point x="607.9077380952381" y="216.0" />
+      <point x="607.9077380952381" y="186.0" />
+      <point x="800.2698412698413" y="186.0" />
+      <point x="-50.5" y="61.0" />
+    </edge>
+    <edge source="com.example.demo.models.Route" target="com.example.demo.models.Location" relationship="DEPENDENCY">
+      <point x="64.0" y="-72.0" />
+      <point x="192.0" y="561.0" />
+      <point x="475.27480158730145" y="561.0" />
+      <point x="475.27480158730145" y="551.0" />
+      <point x="834.5079365079365" y="551.0" />
+      <point x="834.5079365079365" y="531.0" />
+      <point x="663.1577380952381" y="531.0" />
+      <point x="50.25" y="127.0" />
+    </edge>
+    <edge source="com.example.demo.models.Location" target="com.example.demo.models.Route" relationship="DEPENDENCY">
+      <point x="50.25" y="127.0" />
+      <point x="663.1577380952381" y="531.0" />
+      <point x="834.5079365079365" y="531.0" />
+      <point x="834.5079365079365" y="551.0" />
+      <point x="475.27480158730145" y="551.0" />
+      <point x="475.27480158730145" y="561.0" />
+      <point x="192.0" y="561.0" />
+      <point x="64.0" y="-72.0" />
+    </edge>
+    <edge source="com.example.demo.models.FileManager" target="com.example.demo.models.GuidedTour" relationship="DEPENDENCY">
+      <point x="-60.0" y="72.0" />
+      <point x="-50.5" y="-82.5" />
+    </edge>
+    <edge source="com.example.demo.models.GuidedTour" target="com.example.demo.models.FileManager" relationship="DEPENDENCY">
+      <point x="-50.5" y="-82.5" />
+      <point x="-60.0" y="72.0" />
+    </edge>
+    <edge source="com.example.demo.controllers.LocationController" target="com.example.demo.exceptions.ResourceNotFoundException" relationship="CREATE">
+      <point x="-96.66666666666674" y="-27.5" />
+      <point x="753.5833333333333" y="757.0" />
+      <point x="663.0" y="757.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.example.demo.repositories.NatureRepository" target="com.example.demo.models.Nature" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.0" />
+      <point x="855.7698412698413" y="196.0" />
+      <point x="901.2698412698413" y="196.0" />
+      <point x="50.5" y="61.0" />
+    </edge>
+    <edge source="com.example.demo.models.GuidedTour" target="com.example.demo.models.FileManager" relationship="TO_ONE">
+      <point x="50.5" y="-82.5" />
+      <point x="240.77480158730145" y="216.0" />
+      <point x="259.77480158730145" y="216.0" />
+      <point x="60.0" y="72.0" />
+    </edge>
+    <edge source="com.example.demo.repositories.LocationRepository" target="com.example.demo.models.Location" relationship="DEPENDENCY">
+      <point x="0.0" y="-15.0" />
+      <point x="925.0" y="541.0" />
+      <point x="834.5079365079365" y="541.0" />
+      <point x="834.5079365079365" y="531.0" />
+      <point x="663.1577380952381" y="531.0" />
+      <point x="50.25" y="127.0" />
+    </edge>
+    <edge source="com.example.demo.models.FileManager" target="com.example.demo.models.GuidedTour" relationship="TO_MANY">
+      <point x="60.0" y="72.0" />
+      <point x="259.77480158730145" y="216.0" />
+      <point x="240.77480158730145" y="216.0" />
+      <point x="50.5" y="-82.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="519.0" y="526.0" />
+  <SelectedNodes>
+    <node>com.example.demo.models.Quiz</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
