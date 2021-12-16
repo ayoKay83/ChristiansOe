@@ -37,7 +37,8 @@ function main() {
 
 
     /* Create pins and their popups*/
-
+    // Vi har taget udgangspunkt i denne måde at sætte pins ind på mappet
+    // https://jsfiddle.net/askebos/v2c4fk40/9/ linje 15
     let myMarkerLayer = new L.LayerGroup();
     for (let i = 0; i < pinData.length; i++) {
         locationMarker = L.marker([pinData[i][2], pinData[i][3]]
@@ -48,6 +49,8 @@ function main() {
     }
 
     /*Initialize map; and change Lat & Lang to Christiansø*/
+    // Vi har taget udgangspunkt i dukumentationen på leaflets hjemmeside
+    // https://leafletjs.com/examples/quick-start/
     let x = 55.32037
     let y = 15.18821
     let z = 16
@@ -58,12 +61,17 @@ function main() {
 
 
     /*Add tileLayers from openstreetmap*/
+    // Vi har taget udgangspunkt i dukumentationen på leaflets hjemmeside
+    // https://leafletjs.com/examples/quick-start/
     mapLink = '<a href="http://openstreetmap.org">OpenStreetMap<\/a>';
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; ' + mapLink + ' Christiansø Map',
         maxZoom: 18,
     }).addTo(myMap);
 
+    /*Draw route function*/
+    // Her har vi taget udgangspunkt i dokumentationen på leaflets hjemmeside
+    // https://leafletjs.com/reference.html#polyline
     function drawRoute(list) {
         for (let i = 0; i < pinData.length; i++) {
             L.polyline(list).addTo(myMap);

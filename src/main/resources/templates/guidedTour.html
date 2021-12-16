@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <!-- der er taget udgangspunkt i stylesheets og template fra https://embed.plnkr.co/plunk/wH7u64 -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.label/leaflet.label.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">Kort</a>
+                </li>
+                <li>
+                    <a href="nature.html">Øens Natur</a>
+                </li>
+                <li>
+                    <a href="guidedTour.html">Guidede Tours</a>
+                </li>
+                <li>
+                    <a id="ferry-timer">Færgeafgang om: 12min</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="container">
+    <div id="guided-tour-page">
+        <div class="content-box-container">
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+            <div class="content-box">
+                <h1 class="content-box-header"></h1>
+                <img class="content-box-img-guided-tour">
+                <p class="content-box-text"></p>
+                <li>
+                    <a>Dyr 1</a>
+                    ,
+                    <a>Dyr 2</a>
+                </li>
+                <li>
+                    <a>Plante 1</a>
+                    ,
+                    <a>Plante 2</a>
+                </li>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- scripts fra https://embed.plnkr.co/plunk/wH7u64 -->
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet-src.js"></script>
+<script src="http://leaflet.github.io/Leaflet.label/leaflet.label.js"></script>
+<script src="script.js"></script>
+</body>
+<script>
+    $('.content-box-header').text('Lorem ipsum');
+
+    // Tekst fundet på https://www.lipsum.com/feed/html
+    $('.content-box-text').text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. In volutpat\n' +
+        'felis eget elit accumsan, vel vulputate enim sollicitudin. Aliquam eu lobortis libero, vitae\n' +
+        'fringilla dui. Donec eget dolor et arcu consequat ornare. Cras dignissim aliquet massa, nec\n' +
+        'condimentum leo vestibulum varius. Sed vitae ante eu nisi finibus dictum in in libero. Duis\n' +
+        'efficitur tortor consectetur tellus euismod, id aliquet ante ullamcorper. Duis consectetur nisi\n' +
+        'a magna viverra vulputate. Quisque viverra purus ac egestas varius. Praesent feugiat efficitur\n' +
+        'enim, non fermentum mi varius ac. In hac habitasse platea dictumst.\n' +
+        '\n' +
+        'Sed posuere pretium magna quis tincidunt. Proin mattis tortor quis elementum lobortis.\n' +
+        'Vivamus eros velit, ornare in porta ac, molestie non ex. Interdum et malesuada fames ac ante\n' +
+        'ipsum primis in faucibus. Morbi faucibus lorem non erat interdum tincidunt. Proin vitae aliquam\n' +
+        'nibh. Sed ligula dolor, pharetra nec pretium quis, accumsan in felis. Mauris eu dapibus risus,\n' +
+        'nec congue risus.\n' +
+        '\n' +
+        'Aliquam pulvinar molestie ipsum. Sed scelerisque sit amet nisi a varius. Fusce non odio vel\n' +
+        'augue pretium commodo. Donec felis nunc, pharetra nec efficitur at, tincidunt at justo. Morbi\n' +
+        'quis elit lobortis, aliquet massa et, fringilla nibh. Fusce diam nisl, venenatis nec lectus sed,\n' +
+        'fermentum commodo diam. Suspendisse lacinia, massa in pharetra mattis, lectus nunc efficitur\n' +
+        'lacus, tincidunt condimentum ipsum lacus at felis. Phasellus tempus congue euismod. Phasellus\n' +
+        'euismod nisi in venenatis sollicitudin. Maecenas euismod accumsan felis id vulputate. Maecenas\n' +
+        'eu pharetra sapien, nec sodales dui. Donec sodales nisi in ipsum varius, a imperdiet tellus\n' +
+        'elementum. Aliquam at dictum elit, quis facilisis felis. Sed ante odio, ullamcorper a dignissim\n' +
+        'non, aliquet at lorem.\n' +
+        '\n' +
+        'Suspendisse lacinia nec turpis non vulputate. Ut feugiat accumsan mauris tincidunt condimentum.\n' +
+        'Suspendisse venenatis vel lectus a facilisis. Ut dolor libero, ultricies vitae iaculis non, dictum\n' +
+        'eget turpis. Vestibulum ac porttitor odio. Morbi sit amet dui sed nisl luctus ornare at quis dui.\n' +
+        'Mauris interdum quam eu est euismod dictum. Phasellus at sapien consequat, consequat dui vel,\n' +
+        'tempor neque. Praesent condimentum sollicitudin quam, vel aliquet nulla. Sed sit amet metus eu\n' +
+        'diam tempus lobortis.\n' +
+        '\n' +
+        'Cras iaculis, nulla in porta interdum, ipsum eros egestas velit, at ultrices leo turpis ac lacus.\n' +
+        'Mauris tempus consequat sem, aliquet fringilla sem. Proin sit amet finibus lectus. Ut magna ante,\n' +
+        'mattis ut dignissim eu, ullamcorper non risus. Nullam ut hendrerit tortor. Curabitur dui libero,\n' +
+        'tristique ut nisi non, lacinia tempus sapien. Praesent in sapien faucibus, malesuada tellus nec,\n' +
+        'interdum sapien. Maecenas tempor scelerisque finibus. Praesent ornare id mauris ut ultricies.\n' +
+        '\n' +
+        'Generated 5 paragraphs, 406 words, 2753 bytes of Lorem Ipsum')
+</script>
+</html>

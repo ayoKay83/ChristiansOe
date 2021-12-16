@@ -1,4 +1,9 @@
+
+/*Meget CSS er lavet med hjælp fra W3School's forskellige uddybninger og tutorals af CSS
+https://www.w3schools.com/css/default.asp */
+
 html, body, #container {
+    background: #f4f4f5;
     height: 100%;
     overflow: hidden;
     width: 100%;
@@ -10,9 +15,11 @@ body {
 
 .navbar {
     min-height: 50px;
+    max-height: 50px;
 }
 
 #sidebar {
+    margin-top: 3%;
     float: left;
     height: 100%;
     max-width: 100%;
@@ -50,6 +57,15 @@ body {
     background: burlywood;
 }
 
+#guided-tour-page{
+    overflow: scroll;
+    float: left;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    background: burlywood;
+}
+
 .content-box{
     margin-top: 4%;
     margin-left: 2%;
@@ -73,8 +89,14 @@ body {
 
 }
 
-.content-box-img{
+.content-box-img-nature{
     content:url("/img/animals/seal.jpg");
+    max-width: 100%;
+
+}
+
+.content-box-img-guided-tour{
+    content:url("/img/locations/den_store_taarn_linje2.jpeg");
     max-width: 100%;
 
 }
@@ -84,4 +106,13 @@ body {
     margin-right: 2%;
     margin-top: 2%;
     margin-bottom: 2%;
+}
+
+li {
+    margin-left: 2%;
+}
+
+#ferry-timer{
+    color: black;
+    font-size: 14pt;
 }
