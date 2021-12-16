@@ -51,23 +51,32 @@ body {
 }
 
 .content-box{
-    margin-top: 25px;
-    margin-left: 10px;
-    margin-bottom: 25px;
-    border: 1px solid azure;
+    margin-top: 4%;
+    margin-left: 2%;
+    margin-bottom: 4%;
     border-radius: 20px;
     background: azure;
     padding: 25px;
-    width: 350px;
-    height: 700px;
+    width: 96%;
+    height: 96%;
     overflow: scroll;
     text-overflow: ellipsis;
 }
 
 .content-box-container{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 1px;
+}
+
+.content-box-header {
+
+}
+
+.content-box-img{
+    content:url("/img/animals/seal.jpg");
+    max-width: 100%;
+
 }
 
 .content-box-text{
