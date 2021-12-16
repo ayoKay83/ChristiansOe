@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -9,32 +8,32 @@ import java.util.List;
 import java.util.Objects;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "attractionId")
+        property = "natureId")
 @Entity
-public class Attraction {
+public class Nature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="attraction_id")
-    private int attractionId;
+    @Column(name="nature_id")
+    private int natureId;
 
     private String name;
     private String description;
 
-    @ManyToMany(mappedBy = "attractions")
+    @ManyToMany(mappedBy = "natures")
     private List<Location> locations;
 
-    public Attraction(){}
+    public Nature(){}
 
-    public Attraction(int attractionId, String name, String description, List<Location> locations) {
-        this.attractionId = attractionId;
+    public Nature(int natureId, String name, String description, List<Location> locations) {
+        this.natureId = natureId;
         this.name = name;
         this.description = description;
         this.locations = locations;
     }
 
-    public int getAttractionId() {
-        return attractionId;
+    public int getNatureId() {
+        return natureId;
     }
 
     public String getName() {
@@ -57,8 +56,8 @@ public class Attraction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Attraction attraction = (Attraction) o;
-        return Objects.equals(name, attraction.name);
+        Nature nature = (Nature) o;
+        return Objects.equals(name, nature.name);
     }
     @Override
     public int hashCode() {
@@ -67,8 +66,8 @@ public class Attraction {
 
     @Override
     public String toString() {
-        return "Attraction{" +
-                "attractionId=" + attractionId +
+        return "Nature{" +
+                "natureId=" + natureId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", locations=" + locations +

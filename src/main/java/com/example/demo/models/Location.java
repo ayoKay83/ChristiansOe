@@ -1,7 +1,6 @@
 package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -29,7 +28,7 @@ public class Location {
             name = "location_attraction",
             joinColumns = @JoinColumn(name = "location_id"),
             inverseJoinColumns = @JoinColumn(name = "attraction_id"))
-    private List<Attraction> attractions;
+    private List<Nature> natures;
 
     @OneToMany(mappedBy = "location", cascade=CascadeType.ALL)
     private List<Quiz> quiz;
@@ -54,14 +53,14 @@ public class Location {
         this.frontImage = frontImage;
     }
 
-    public Location(int locationId, String name, String description, double xpos, double ypos, String frontImage, List<Attraction> attractions, List<Quiz> quiz, List<Route> routes) {
+    public Location(int locationId, String name, String description, double xpos, double ypos, String frontImage, List<Nature> natures, List<Quiz> quiz, List<Route> routes) {
         this.locationId = locationId;
         this.name = name;
         this.description = description;
         this.xpos = xpos;
         this.ypos = ypos;
         this.frontImage = frontImage;
-        this.attractions = attractions;
+        this.natures = natures;
         this.quiz = quiz;
         this.routes = routes;
     }
@@ -106,12 +105,12 @@ public class Location {
         this.ypos = ypos;
     }
 
-    public List<Attraction> getAttractions() {
-        return attractions;
+    public List<Nature> getAttractions() {
+        return natures;
     }
 
-    public void setAttractions(List<Attraction> attractions) {
-        this.attractions = attractions;
+    public void setAttractions(List<Nature> natures) {
+        this.natures = natures;
     }
 
     public List<Quiz> getQuiz() {
@@ -159,7 +158,7 @@ public class Location {
                 ", name='" + name + '\'' +
                 ", xpos=" + xpos +
                 ", ypos=" + ypos +
-                ", attractions=" + attractions +
+                ", natures=" + natures +
                 ", quiz=" + quiz +
                 ", routes=" + routes +
                 '}';

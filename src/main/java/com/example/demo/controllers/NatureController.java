@@ -1,4 +1,4 @@
 package com.example.demo.controllers;
 
-public class AttractionController {
+public class NatureController {
 }
