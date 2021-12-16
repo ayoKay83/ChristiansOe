@@ -41,3 +41,38 @@ body {
     }
 }
 
+#nature-page{
+    overflow: scroll;
+    float: left;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    background: burlywood;
+}
+
+.content-box{
+    margin-top: 25px;
+    margin-left: 10px;
+    margin-bottom: 25px;
+    border: 1px solid azure;
+    border-radius: 20px;
+    background: azure;
+    padding: 25px;
+    width: 350px;
+    height: 700px;
+    overflow: scroll;
+    text-overflow: ellipsis;
+}
+
+.content-box-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1px;
+}
+
+.content-box-text{
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
