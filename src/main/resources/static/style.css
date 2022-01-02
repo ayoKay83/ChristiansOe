@@ -90,13 +90,13 @@ body {
 }
 
 .content-box-img-nature{
-    content:url("../img/animals/seal.jpg");
+    content:url("img/animals/seal.jpg");
     max-width: 100%;
 
 }
 
 .content-box-img-guided-tour{
-    content:url("../img/locations/den_store_taarn_linje2.jpeg");
+    content:url("img/locations/den_store_taarn_linje2.jpeg");
     max-width: 100%;
 
 }
